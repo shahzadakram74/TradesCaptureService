@@ -1,0 +1,31 @@
+server:
+  port: 8080
+
+instructions:
+  inbound:
+    topic: instructions.inbound
+  outbound:
+    topic: instructions.outbound
+  
+spring:  
+  config:
+    activate:
+      on-profile: local
+  kafka:
+    consumer:      
+      bootstrap-servers: localhost:9092 
+      group-id: instructions-capture-group-local
+      auto-offset-reset: latest
+    
+    producer:
+      bootstrap-servers: localhost:9092
+      properties:
+       enable.idempotence: false
+       linger.ms: 5
+ 
+app:
+  kafka:
+    topic:
+      inbound: instructions.inbound
+      outbound: instructions.outbound
+  platform-id: ACCT123  	  

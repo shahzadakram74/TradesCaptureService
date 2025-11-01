@@ -1,0 +1,40 @@
+server:
+  port: 8088
+
+instructions:
+  inbound:
+    topic: instructions.inbound-prod
+  outbound:
+    topic: instructions.outbound-prod
+
+spring:  
+  config:
+    activate:
+      on-profile: prod
+  kafka:
+    consumer:      
+      bootstrap-servers: prod-kafka-1:9092, prod-kafka-2:9092
+      group-id: instructions-capture-group # The official production group ID     
+      properties:
+        security.protocol: SSL
+        ssl.truststore.location: /etc/certs/kafka.truststore.jks
+
+    producer:      
+      bootstrap-servers: prod-kafka-1:9092, prod-kafka-2:9092
+      properties:        
+        acks: all
+        retries: 5
+        enable.idempotence: true # Essential for robust production systems
+        # Security properties match consumer security
+        security.protocol: SSL
+        ssl.truststore.location: /etc/certs/kafka.truststore.jks
+
+app:
+   kafka:
+     topic:
+       inbound: instructions.inbound-prod
+       outbound: instructions.outbound-prod
+   platform-id: ACCT123-prod
+
+actuator:
+  enabled: true
