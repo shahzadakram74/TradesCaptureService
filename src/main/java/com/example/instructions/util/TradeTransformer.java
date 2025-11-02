@@ -55,7 +55,7 @@ public class TradeTransformer {
     }
   
     private String normalizeTradeType(String tradeType) {
-        if (tradeType == null) return "U"; // Unknown
+        if (tradeType == null) return "U";
         String normalized = tradeType.toUpperCase().trim();
         return switch (normalized) {
             case "BUY", "B" -> "B";
