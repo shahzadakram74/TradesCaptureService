@@ -9,6 +9,7 @@ import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,7 +22,8 @@ import java.util.concurrent.ConcurrentHashMap;
 public class TradeService {
 
 	private static final Logger log = LoggerFactory.getLogger(TradeService.class);
-
+	
+	private final String platformId;
 	private final TradeTransformer tradeTransformer;
 	private final KafkaPublisher kafkaPublisher;
 	private final ObjectMapper objectMapper;
@@ -30,11 +32,12 @@ public class TradeService {
 	private final ConcurrentHashMap<String, CanonicalTrade> auditStore = new ConcurrentHashMap<>();
 
 	public TradeService(TradeTransformer tradeTransformer, KafkaPublisher kafkaPublisher, ObjectMapper objectMapper,
-			CsvMapper csvMapper) {
+			CsvMapper csvMapper, @Value("${trade.platform.id:ACCT123}") String platformId) {
 		this.tradeTransformer = tradeTransformer;
 		this.kafkaPublisher = kafkaPublisher;
 		this.objectMapper = objectMapper;
 		this.csvMapper = csvMapper;
+		this.platformId = platformId;
 	}
 
 	public int processFileUpload(MultipartFile file) {
@@ -108,7 +111,7 @@ public class TradeService {
 			PlatformTrade transformedTrade = tradeTransformer.transformToPlatformTrade(canonicalTrade);
 
 			// 3. WRAPPER CREATION (Correctly uses the AllArgsConstructor)
-			PlatformTrade.PlatformTradeWrapper wrapper = new PlatformTrade.PlatformTradeWrapper("ACCT123",
+			PlatformTrade.PlatformTradeWrapper wrapper = new PlatformTrade.PlatformTradeWrapper(this.platformId,
 					transformedTrade);
 
 			// 4. SERIALIZE

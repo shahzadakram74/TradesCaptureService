@@ -28,4 +28,8 @@ app:
     topic:
       inbound: instructions.inbound
       outbound: instructions.outbound
-  platform-id: ACCT123  	  
+
+trade:
+  platform:
+     id: ACCT123
+  	  
