@@ -1,0 +1,4 @@
+account_number,security_id,trade_type,quantity,price,amount,timestamp
+2001456789,MSFT,B,500,125.50,62750.00,2025-08-04T21:15:40
+3009987654,goog,Sell,250,2000.10,500025.00,2025-08-04T21:15:40
+4000123456,tsla,BUY,10,850.75,8507.50,2025-08-04T21:15:40

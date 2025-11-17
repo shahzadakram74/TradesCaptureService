@@ -6,23 +6,23 @@ instructions:
     topic: instructions.inbound
   outbound:
     topic: instructions.outbound
-  
+
 spring:  
   config:
     activate:
       on-profile: local
   kafka:
-    consumer:      
-      bootstrap-servers: localhost:9092 
+    consumer:
+      bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092} 
       group-id: instructions-capture-group-local
       auto-offset-reset: latest
     
     producer:
-      bootstrap-servers: localhost:9092
+      bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
       properties:
-       enable.idempotence: false
-       linger.ms: 5
- 
+        enable.idempotence: false
+        linger.ms: 5
+
 app:
   kafka:
     topic:
@@ -32,4 +32,3 @@ app:
 trade:
   platform:
      id: ACCT123
-  	  

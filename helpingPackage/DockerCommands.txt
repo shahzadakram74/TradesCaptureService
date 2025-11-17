@@ -1,0 +1,27 @@
+ cd /mnt/c/DevTools/eclipse/workspace/TradesCaptureService/
+ 
+# to get Info Docker Commands for Trade Capture Service
+docker info
+
+# to build the Docker image for Trade Capture Service
+docker build -t trade-capture-service:1.0.0 .
+
+# to run the Trade Capture Service container
+docker run -p 8080:8080 \
+           -e SPRING_KAFKA_BOOTSTRAP_SERVERS='host.docker.internal:9092' \
+           -e SPRING_PROFILES_ACTIVE=local \
+           trade-capture-service:1.0.0 
+
+# to view the logs of the running container
+docker logs -f <container_id>
+
+
+docker pull hello-world
+
+# Docker Command Reference
+docker ps,Lists all running containers.
+docker ps -a,"Lists all containers, including those that have stopped (-a for all)."
+docker stop [ID or Name],Gracefully stops a running container.
+docker rm [ID or Name],Removes a stopped container (frees up disk space).
+
+docker run -p 8080:8080 -e SPRING_KAFKA_BOOTSTRAP_SERVERS='host.docker.internal:9092' -e SPRING_PROFILES_ACTIVE=dev trade-capture-service:1.0.0

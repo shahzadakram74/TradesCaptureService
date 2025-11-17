@@ -1,0 +1,32 @@
+{
+	"info": {
+		"_postman_id": "05b76b50-bacd-48de-8b2e-0f72739b9c0a",
+		"name": "CodingChallenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "8285125"
+	},
+	"item": [
+		{
+			"name": "TradeCaptureService",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": "http://localhost:8080/instructions/v1/api/upload"
+			},
+			"response": []
+		}
+	]
+}

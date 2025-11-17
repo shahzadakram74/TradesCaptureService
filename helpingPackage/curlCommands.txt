@@ -1,0 +1,4 @@
+## For *.csv file
+curl -X POST "http://localhost:8080/instructions/v1/api/upload" -H "accept: */*" -H "Content-Type: multipart/form-data" -F "file=@trades.csv;type=application/json"
+## For *.json file
+curl -X POST "http://localhost:8080/instructions/v1/api/upload" -H "accept: */*" -H "Content-Type: multipart/form-data" -F "file=@trades.json;type=application/json"

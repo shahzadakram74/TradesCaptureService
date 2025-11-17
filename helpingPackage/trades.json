@@ -1,0 +1,12 @@
+[
+  {
+    "account_number": "1122334455",  
+    "security_id": "TUV456c",        
+    "trade_type": "b",
+    "quantity": 200,
+    "price": 500.00,
+    "amount": 100000.00,
+    "timestamp": "2025-08-04T21:15:40"
+  }
+]
+
